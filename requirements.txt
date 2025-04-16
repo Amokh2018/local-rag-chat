@@ -1,0 +1,14 @@
+# Core NLP
+sentence-transformers==2.2.2
+faiss-cpu==1.10.0
+
+# PDF parsing
+PyMuPDF==1.22.5
+
+# LLM connection
+python-dotenv==1.0.1
+
+# Streamlit UI
+streamlit==1.33.0
+
+
