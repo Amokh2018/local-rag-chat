@@ -1,6 +1,25 @@
 from rag.retriever import get_relevant_chunks
-from rag.llm_interface import query_llm
 from pathlib import Path
+import os
+import requests
+
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "mistral")
+OLLAMA_URL = "http://localhost:11434/api/generate"
+
+def query_llm(prompt):
+    payload = {
+        "model": OLLAMA_MODEL,
+        "prompt": prompt,
+        "stream": False
+    }
+
+    try:
+        response = requests.post(OLLAMA_URL, json=payload)
+        response.raise_for_status()
+        return response.json()["response"]
+    except requests.exceptions.RequestException as e:
+        return f"Error connecting to Ollama: {e}"
+
 
 TEMPLATE_PATH = Path("llm/prompt_template.txt")
 DEFAULT_TEMPLATE = """You are a helpful assistant. Use the following context to answer the question.
@@ -35,15 +54,15 @@ def run_rag(question):
     print("🔍 Retrieving relevant chunks...")
     chunks = get_relevant_chunks(question)
 
-    print("\n✅ Retrieved Chunks (showing sources):")
+    print("\n Retrieved Chunks (showing sources):")
     for idx, chunk in enumerate(chunks, start=1):
         preview = chunk['text'][:100].replace("\n", " ")  # short preview
         print(f"   {idx}. [{chunk['source']}]: {preview}...")
 
-    print("\n🧾 Building prompt with context...")
+    print("\nBuilding prompt with context...")
     prompt = build_prompt(chunks, question)
 
-    print("🧠 Querying local LLM...")
+    print("Querying local LLM...")
     answer = query_llm(prompt)
 
     return answer, chunks

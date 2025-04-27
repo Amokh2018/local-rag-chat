@@ -118,4 +118,6 @@ Perfect for confidential documents, research papers, internal reports, or teachi
 
 Created by **Ali Mokh**  
 Feel free to reach out for questions or improvements!
+- Email: ali.mokh@ericsson.com
+
 

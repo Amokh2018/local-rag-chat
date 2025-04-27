@@ -16,3 +16,7 @@ index:
 	@echo "Building FAISS index from documents..."
 	$(ACTIVATE) && $(PYTHON) rag/build_index.py
 
+clear:
+	@echo "🧹 Cleaning up generated index and chunk files..."
+	rm -f embeddings/index.faiss embeddings/chunks.pkl
+	@echo "✅ Cleared FAISS index and chunks.

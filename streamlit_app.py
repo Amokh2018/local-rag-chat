@@ -1,5 +1,5 @@
 import streamlit as st
-from rag.rag_pipeline import run_rag, get_relevant_chunks
+from rag.rag_pipeline import run_rag
 
 st.set_page_config(page_title="📄 Chat with Your Documents", layout="wide")
 st.title("📄 Chat with Your Documents – Local RAG")
