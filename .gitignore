@@ -3,7 +3,7 @@
 __pycache__/
 
 # Document inputs
-data/documents/
+
 !data/.gitkeep  
 
 # Embeddings and vector store
